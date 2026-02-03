@@ -179,7 +179,9 @@ struct CalculatorView: View {
             VStack(alignment: .leading, spacing: 2) {
                 TextField("가격 입력", text: $inputPrice)
                     .keyboardType(.numberPad)
-                    .onChange(of: inputPrice, perform: handlePriceChange)
+                    .onChange(of: inputPrice) { oldValue, newValue in
+                        handlePriceChange(newValue)
+                    }
             }
             HStack(spacing: 2) {
                 TextField("할인율", text: $inputDiscount)
@@ -281,8 +283,8 @@ struct CalculatorView: View {
                     .buttonBorderShape(.circle)
                     .controlSize(.large)
                     .tint(Color(.systemGray5))
-                    .onChange(of: selectedPhoto) { newItem in
-                        guard let newItem else { return }
+                    .onChange(of: selectedPhoto) { oldValue, newValue in
+                        guard let newItem = newValue else { return }
                         newItem.loadTransferable(type: Data.self) { result in
                             switch result {
                             case .success(let data?):
@@ -410,3 +412,4 @@ private struct ContainerMinYKey: PreferenceKey {
         value = nextValue()
     }
 }
+
