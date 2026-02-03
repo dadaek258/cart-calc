@@ -1,3 +1,11 @@
+//
+//  Item.swift
+//  Cart Calc
+//
+//  Created by 이다은 on 1/15/26.
+//
+
+
 import Foundation
 
 struct Item: Identifiable {
